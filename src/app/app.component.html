@@ -1,21 +1,162 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<!--div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        <div class="Cipherbox">
+        
+            <H1 class="nadpis"><span class="identificator">o</span>pen text</H1>
+                
+        </div>
+        </div>
+        
+        <div class="col-md-4" *ngIf="Selected">
+        <div class="Cipherbox">
+            <H1 class="nadpis"><span class="identificator cipher" id="cipher">c</span>ipher</H1>
+        </div>
+        </div>
+        <div class="col-md-4">
+        <div >
+        <a href="#cipher">
 
-<router-outlet></router-outlet>
+                    <div class="br" >settings</div>
+        <button class="addcipher addcipher-rotate addcipher-samik-white" (click)="SettingsOC(1)"></button>
+        
+    </a>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="modal-content"  *ngIf="settings">
+    <span class="close"  (click)="SettingsOC(0)">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+<router-outlet></router-outlet>-->
+<!--
+<div class="console" id="loading" *ngIf="!loadingpryc"><span class="prefix" id="loading2" *ngIf="!loadingpryc">[!]</span>:{{konzole}}</div>
+<div class="bg-blink" *ngIf="!loadingon"></div>
+<div class="console SFA" *ngIf="!ofibg" style="color: rgb(8, 218, 1);">{{SFA}}</div>
+-->
+<div class="bg-offi" [@loading]="loading">
+    <div class="opening_loading_window container" [@loadingLoadingWindow]="loading">
+        <h2 class="headline_loading"><span class="prefix" style="margin-right: 0.5vw">[<span
+                    class="prefixblink">!</span>]</span>loading</h2>
+        <div class="subline_loading" style="font-size: 1vw; color:rgb(182, 184, 185);">{{SFA}}</div>
+        <div class="loading_bar">
+            <div class="bar"></div>
+        </div>
+    </div>
+    <div [@loadingSuccesWindow]="loading" class="opening_Success_window">Connection Established</div>
+    <div [@loadingSide1]="loading" class="opening_side" id="side1" [@loading]="loading"></div>
+    <div [@loadingSide2]="loading" class="opening_side" id="side2" [@loading]="loading"></div>
+
+
+
+    <h1 class="TheMachine">&nbsp;{{TheMachine}}&nbsp;</h1>
+
+
+    <div class="prefixblink row" id="prefcentre">
+        <h2 [@left]="loading">[</h2><span>!</span>
+        <h2 [@right]="loading">]</h2>
+    </div>
+
+
+    <input type="text" [@console]="loading" *ngIf="console" class="consoleinput" (keydown.enter)="consoleinput($event)">
+
+
+    <div class="MBox" [@box]="loading" *ngFor="let window of windows" cdkDrag id="{{window.name}}">
+        <h1 class="title">{{window.name}}</h1>
+        <div class="subline">
+            <span class="subtitle">{{window.purpose}}</span>
+        </div>
+        <!--základ-->
+
+        <textarea *ngIf="window.event != 'sha' && window.event != 'help'" class="CTA" wrap="off" placeholder="{{window.keytype}}"
+            type="text" id="{{window.alphabet}}" (keyup)="Sifrovat(window.event)"></textarea>
+
+        <!--substituční-->
+        <textarea *ngIf="window.event === 'Substitution' || window.event === 'vigenere' || window.event === 'Playfair'" class="CTA" wrap="off"
+            Placeholder="Key Alphabet" type="text" id="{{window.keyalphabet}}"
+            (keyup)="Sifrovat(window.event)"></textarea>
+        <!--základ-->
+        <textarea *ngIf="window.event != 'Analysis' && window.event != 'help'" class="CTA" wrap="off" Placeholder="Plaintext" type="text"
+            id="{{window.Plaintext}}" (keyup)="Sifrovat(window.event)"></textarea>
+        <form *ngIf="window.event ==='sha'" class="container content2" style="color: aliceblue; margin:0">
+            <div class="row">
+                <input style="margin-left: 1vw; padding-right: 0.5vw;" type="radio" name="type" value="Sha1"
+                    [(ngModel)]="type" (click)="Sifrovat(window.event)">SHA1<br>
+                <input style="margin-left: 1vw; padding-right: 0.5vw;" type="radio" name="type" value="Sha256"
+                    [(ngModel)]="type" (click)="Sifrovat(window.event)">SHA256<br>
+                <input style="margin-left: 1vw; padding-right: 0.5vw;" type="radio" name="type" value="Sha512"
+                    [(ngModel)]="type" (click)="Sifrovat(window.event)">SHA512<br>
+            </div>
+        </form>
+        <textarea *ngIf="window.event === 'Analysis'" class="CTA" style="height: 100%" wrap="off" Placeholder="Text" type="text"
+            id="{{window.Plaintext}}" (keyup)="Sifrovat(window.event)"></textarea>
+        <label *ngIf="window.event != 'Analysis' && window.event != 'Caesar' && window.event != 'sha' && window.event != 'help'"
+            class="container pismo">Decode&nbsp;
+            <input type="checkbox" id="decode{{window.event}}" (change)="Sifrovat(window.event)">
+            <span class="checkmark"></span>
+        </label>
+
+        <!--Caesar-->
+        <div *ngIf="window.event === 'Caesar' || window.event === 'Playfair'" class="pismo">
+            <span style="margin-left: 1vw;" *ngIf="window.event === 'Playfair'">Collumns:</span>
+            <button class="CKey" (click)="CKey(window.event + 'P')">[+]</button>
+            <input class="input" type="text" readonly id="{{window.event}}" value="0">
+            <button *ngIf="window.event === 'Caesar'" class="CKey" (click)="CKey(window.event +'N')">[-]</button>
+            <div style="margin:0.1vw;" class="container " *ngIf="window.event === 'Playfair'">
+
+                <span>Replace duplicity by:</span><input maxlength="1" value="X" class="UserInputWindow" id="Duplicity">
+                <div style="margin:0vw; padding: 0.1vw" class="row" *ngFor="let Replacer of Replace">Replace excessive
+                    letter<input maxlength="1" type="text" class="UserInputWindow" value="Q"
+                        id="{{Replacer.name}}">by<input type="text" class="UserInputWindow" value="O"
+                        id="{{Replacer.name2}}"></div>
+            </div>
+        </div>
+        <!--základ-->
+        <div style="margin-top: 1vw; margin-bottom: 1vw; padding-left: 1vw" *ngIf="window.event!='help'">
+            <span class="content">Encrypted message</span>
+            <ejs-chart *ngIf="window.name === 'Analysis'" style="margin-right: 1vw; height: 20vh;" id="chart-container"
+                [primaryXAxis]="primaryXAxis" [tooltip]="tooltip">
+                <e-series-collection>
+                    <e-series [dataSource]="chartData" type="Column" xName="char" yName="count" name="analysis"
+                        [marker]="columnMarker">
+                    </e-series>
+                </e-series-collection>
+            </ejs-chart><span class="content2" id="{{window.output}}"></span>
+        </div>
+        <div style="margin-top: 1vw; margin-bottom: 1vw; padding-left: 0.5vw;" *ngIf="window.event === 'help'">
+            <span class="content">Available commands:</span>
+            <ol class="content2" style="margin:0;font-size: 0.6vw; color:aqua">
+                <li>help - basic manual</li>
+                <li>kill [name] - turns off specified window</li>
+                <li>kill all - turns off all active windows</li>
+                <br>
+                <li>caesar - Caesar cipher</li>
+                <li>substitution - substitution cipher</li>
+                <li>vigenere - Vigenère cipher</li>
+                <li>playfair - Playfair cipher</li>
+                <br>
+                <li>aes - Advanced encryption standard -- base64</li>
+                <li>sha - Sha1, Sha256, Sha512 hashing -- base64</li>
+                <br>
+                <li>analysis - frequency analysis</li>
+            </ol>
+            <br>
+            <span class="content">Available cipher settings:</span>
+            <br>
+            <span class="content2" style="color: aliceblue;">alphabet presets</span>
+            <ol class="content2" style="margin:0;font-size: 0.6vw; color:aliceblue">
+                <li>cs - czech alphabet "CH" included</li>
+                <li>en - 26 letter english alphabet</li>
+            </ol>
+        </div>
+
+
+
+
+
+
+
+    </div>
+</div>

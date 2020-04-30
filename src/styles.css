@@ -1,1 +1,564 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+  margin: auto;
+  padding: auto;
+  min-width: unset;
+  max-width: unset;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none; 
+}
+@font-face {
+    font-family: 'Acens';
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 1.2vw;
+    src: local('Acens'), url('Acens.woff') format('woff');
+    }
+body{
+    margin: 0%;
+    padding: 0%;
+    background-color:black;
+    /*background-image:url(img/bg/machinebg.png);*/
+    background-attachment: fixed;
+}
+.Cipherbox{
+    margin: 1%;
+    background-color: rgba(10, 12, 14, 0.466);
+    padding: 1.5%;
+    height: 100%;
+    z-index: -9999;
+}
+.Cipherbox .nadpis{
+    text-transform: uppercase;
+    margin-top: 5%;
+    font-family:'Acens';
+    font-weight:normal;
+    font-size:2vw;
+    color: aliceblue;
+    text-align: center;
+    letter-spacing: 0.5vw;
+
+}
+.container{
+    margin: auto;
+    margin-top: auto;
+    max-width: none;
+}
+
+
+.identificator{
+    letter-spacing: 0;
+    font-size: 2.5vw;
+    padding: 2%;
+    background-image: url(img/machine-indicator-blue.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+
+}
+#cipher{
+    background-image: url(img/machine-indicator-yellow.png);
+} 
+.addcipher{
+  text-align: center;
+
+  background: transparent;
+  border: 0;
+  color: white;
+  /*margin: 10px;*/
+  font-size: 12px;
+  cursor: pointer;
+  background-size: 100% 100%;
+  -webkit-transition: -webkit-transform .1s ease-in-out;
+  -ms-transition: -ms-transform .1s ease-in-out;
+  transition: transform .1s ease-in-out;
+}
+a .addcipher {
+  text-transform: uppercase;
+    font-size: 1.3vw;
+    /*padding: 15%;*/
+    height: 10vw;
+    width: 10vw;
+    line-height: 100px;
+    vertical-align: middle;
+    background-color: transparent;
+    border-style: none;
+    color: white;
+    font-family:'Acens';
+    font-weight:normal;
+    content: ''; 
+    z-index: -1;
+  }
+  .addcipher:hover {
+    text-decoration: none;
+  }
+.addcipher-rotate {
+    transition: transform 1.2s;
+  }
+.addcipher-rotate:hover{
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+  }
+  .addcipher-samik-white {
+    background-image: url(img/samaritan-indicator.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    
+  }
+  .addcipher-samik-white, .addcipher-samik-white:hover {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    
+  }
+  a{
+    text-transform: uppercase;
+    font-family:'Acens';
+    font-weight:normal;
+    font-size:1vw;
+    color: aliceblue;
+    text-decoration: none;
+    letter-spacing: 0.5vw;
+  }
+  a:hover{
+    color: aliceblue;
+    text-decoration: none
+  }
+  a .br{
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    margin-top: 4.4vw;
+    margin-left: 0.6vw;
+  }
+  .modal { /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .console{ 
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:normal;
+    font-size:1.3vw;
+    letter-spacing: 0.3vw;
+    color: rgb(189, 191, 192);
+    margin-left: 3vw;
+    margin-top: 90vh;
+
+  }
+  .console .prefix{color: rgb(233, 216, 122)}
+  .headline_loading .prefix{
+    color: rgb(233, 216, 122);  
+  }
+   .prefixblink{
+    color: rgb(233, 216, 122);  
+    -webkit-animation: blink 5s infinite;
+    animation: blink 2s infinite;
+  }
+    @-webkit-keyframes blink {
+      0%{opacity: 0}
+      50% {opacity: 1}
+      100% {opacity: 0}
+    }
+    
+    @keyframes blink {
+      0%{opacity: 0}
+      50% {opacity: 1}
+      100% {opacity: 0}
+    }
+  .bg-blink{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(179, 174, 174);
+  }
+  .bg-offi{
+   margin: 0%;
+    background: radial-gradient(ellipse at center, rgb(25, 34, 49), rgb(31, 29, 29));
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+	user-select: none;
+  -moz-user-select: none;
+  
+  }
+.TheMachine{
+  margin-top: 2vw;
+  margin-bottom: 0.2vw;
+  text-decoration: underline;
+  text-decoration-style: solid 2vw;
+  text-align: center;
+  text-transform: uppercase;
+  font-family:'Acens';
+  font-weight:normal;
+  font-size:2vw;
+  min-height:2.5vw; 
+  color: rgb(219, 222, 224);
+  letter-spacing: 0.5vw;
+}
+.consoleinput{
+  position:absolute;
+  text-transform: lowercase;
+  z-index: 9999;
+  width: 60vw;
+  left: calc(50vw - 30vw);
+  top:80vh;
+  border: none;
+  color: rgb(179, 174, 174);
+  background-color: rgba(0, 0, 0, 0.733);
+  font-family: 'Roboto Mono', monospace;
+  height: 5vh;
+  font-size: 1.3vw;
+  padding-left: 1vw;
+  overflow: hidden;
+  
+}
+.SFA{
+  font-family: 'Roboto Mono', monospace;
+}
+.MBox{
+  box-shadow: 0.2vw 0.2vw rgb(15, 15, 15);
+  position: absolute;
+  border: 2px solid white;
+  border-radius: 5px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  font-family:'Acens';
+    font-weight:normal;
+    font-size:1vw;
+    color: aliceblue;
+    padding: 0;
+    left: 12vw;
+    top: 12vw;
+    width: 30vw;
+    z-index: 999;
+-webkit-user-select: none; /* Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+/Edge */
+user-select: none; /* Standard */
+}
+.MBox .title{
+  color: white;
+  text-transform: uppercase;
+  font-family:'Acens';
+    font-weight:normal;
+    font-size:1.3vw;
+    color: aliceblue;
+    text-align: left;
+    margin: 0.5vw;
+}
+.MBox .subline{
+  width: 100%;
+  background-color: white;
+}
+.MBox .subline .subtitle{
+  color: rgb(39, 35, 35);
+  text-transform: uppercase;
+  font-family:'Acens';
+    font-weight:normal;
+    font-size:1vw;
+    text-align: left;
+   margin-left: 1vw;
+   margin-top: 0.4vw;
+  margin-bottom: 0.4vw;
+ 
+}
+.MBox .content{
+  background-color: white;
+  padding-left:0.5vw;
+  padding-right:0.5vw;
+  letter-spacing: 0.1vw;
+  font-family: 'Roboto Mono', monospace;
+    font-weight:normal;
+    font-size:1vw;
+    color: rgb(17, 17, 17);
+  margin-top: 1vw;
+ 
+}
+.MBox .content2{
+
+  letter-spacing: 0.1vw;
+  font-family: 'Roboto Mono', monospace;
+    font-weight:normal;
+    font-size:1vw;
+    color: rgb(184, 0, 0);
+  margin: 0.5vw;
+  margin-top: 1vw;
+  margin-left: 2vw;
+  word-break: normal;
+  user-select: text;
+  width: 100%;
+  word-break: break-all;
+  -webkit-user-select: text; /* Safari */        
+-moz-user-select: text; /* Firefox */
+-ms-user-select: text; /* IE10+/Edge */
+user-select: text; /* Standard */
+}
+.CKey{
+  text-align: center;
+  background: transparent;
+  letter-spacing: 1vw;
+  border: rgb(233, 216, 122);
+  border-width: 1vw;
+  color: rgb(233, 216, 122);
+}
+.input{
+  background: transparent;
+  text-align: center;
+  color: white;
+  border: none;
+}
+.CTA{
+  padding-left: 1vw;
+  color: #fefefe;
+  margin-top: 0.5vw;
+  width: 100%;
+  height: 2vw;
+  background: transparent;
+  border: none;
+  border-bottom: 0.1 white solid;
+  letter-spacing: 0.1vw;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8vw;
+  overflow: hidden;
+  
+ 
+}
+.opening_side{
+  position: absolute;
+  width: 50vw;
+  height: 100vh;
+  z-index: 20;
+  
+}
+#side2{
+background: linear-gradient(to left, rgb(7, 7, 7) , rgb(34, 34, 33));
+left: 50vw;
+border-left-style: solid;
+border-left-width: 0.05vw;
+border-left-color: #888;
+}
+#side1{
+  background: linear-gradient(to right,  rgb(7, 7, 7) , rgb(34, 34, 33));
+  border-right-style: solid;
+  border-right-width: 0.05vw;
+  border-right-color: #888;
+}
+.opening_loading_window{
+  position: absolute;
+  width: 30vw;
+  height: 6.5vw;
+  z-index: 22;
+  background:rgb(21, 21, 21);
+  top: calc(50vh - 2.75vw);
+  left: calc(50vw - 15vw);
+  border-style: solid;
+  border-width: 0.08vw;
+  border-color: rgb(196, 195, 195);
+}
+.loading_bar{
+  margin: 1%;
+  height: 3vh;
+  border-style: solid;
+  border-width: 0.08vw;
+  border-color: rgb(190, 188, 188);
+}
+.headline_loading{
+  font-size: 1.3vw;
+  font-family: 'Roboto Mono', monospace;
+  margin-left: 3%;
+  margin-top: 1%;
+  color: rgb(233, 229, 227);
+}
+.bar{
+  height: 3vh;
+  margin:0;
+  background: #fefefe;
+  -webkit-animation: loading 5s ; /* Safari 4.0 - 8.0 */
+  animation: loading 5s;
+}
+@-webkit-keyframes loading {
+  0% {width: 0%}
+  20% {width: 30%}
+  50% {width: 40%}
+  100% {width: 100%}
+}
+
+@keyframes loading {
+  0% {width: 0%}
+  20% {width: 30%}
+  50% {width: 40%}
+  100% {width: 100%}
+}
+.subline_loading{  
+  font-size: 1vw;
+  margin: 0%;
+  margin-left: 3%;
+}
+.opening_Success_window{
+  position: absolute;
+  width: 20vw;
+  height: 3vw;
+  text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.5vw;
+  padding-top: 0.2%;
+  z-index: 21;
+  background:rgb(248, 248, 248);
+  top: calc(50vh - 1.5vw);
+  left: calc(50vw - 10vw);
+  border-style: solid;
+  border-width: 0.08vw;
+  border-color: rgb(26, 25, 25);
+}
+#prefcentre{
+
+  position: absolute;
+  left: calc(50% - 0vw);
+  font-size:2vw;
+  z-index: 15;
+  margin-top: -1vw;
+  
+
+}
+.UserInputWindow{
+  position: relative;
+  text-align: center;
+  background:none;
+  border: none;
+  border-bottom: #949292;
+  border-bottom-width: 0.1vh;
+  border-bottom-style: solid;
+  width: 2vw;
+  height: 1vw;
+  color: rgb(184, 0, 0);
+  margin-left: 0.3vw;
+  margin-right: 0.3vw;
+}
+.pismo{
+  font-family: 'Roboto Mono', monospace;
+  font-weight:normal;
+  font-size:1vw;
+  color: #d1d1d1
+}
+label .container {
+  display: block;
+  position: sticky;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  height: 1.0vw;
+  width: 1.0vw;
+  margin-top: 0.4vw;
+  background-color: rgba(238, 238, 238, 0);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: rgba(204, 204, 204, 0);
+  border-style: solid;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: rgba(32, 113, 180, 0);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid rgb(184, 0, 0);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/*.machinebox{
+  position: absolute;
+  text-align: center;
+  width:  30vw;
+  height: 10vw;
+  top:calc(50% - 5vw);
+  left: calc(50% - 15vw)
+}*/
+.menu{
+  height: 30vh;
+  width: 10vw;
+  background-color: white;
+  position: absolute;
+  z-index: 999;
+  top: 30vh;
+  left:2vw
+}
