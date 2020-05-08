@@ -6,9 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ForumComponent } from './forum/forum.component';
 import {DragDropModule} from '@angular/cdk/drag-drop'; 
-import { TooltipModule } from '@syncfusion/ej2-angular-popups';
-import { ChartModule,CategoryService,DateTimeService,StepLineSeriesService, TooltipService,ColumnSeriesService  } from '@syncfusion/ej2-angular-charts'; 
-import { DataLabelService, LineSeriesService } from '@syncfusion/ej2-angular-charts';
+
 
 @NgModule({
   declarations: [
@@ -19,14 +17,12 @@ import { DataLabelService, LineSeriesService } from '@syncfusion/ej2-angular-cha
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-    ChartModule,
-    TooltipModule,
     BrowserAnimationsModule,
     FormsModule
   
     
   ],
-  providers: [CategoryService, ChartModule,TooltipService,DataLabelService,LineSeriesService,ColumnSeriesService,StepLineSeriesService,DateTimeService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

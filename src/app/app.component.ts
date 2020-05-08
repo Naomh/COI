@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { delay } from 'q';
 import { trigger, state, transition, style, animate, keyframes } from '@angular/animations';
 import * as CryptoJS from 'crypto-js'
-import { forEach } from '@angular/router/src/utils/collection';
-import { decode } from 'punycode';
-import { defaultIterableDiffers } from '@angular/core/src/change_detection/change_detection';
+import {Chart} from 'chart.js'
+
 
 @Component({
   selector: 'app-root',
@@ -73,25 +72,23 @@ export class AppComponent {
   public ofibg: boolean = false;
   public TheMachine: string = '';
   public console: boolean = false;
+  public chart:any;
   //routing
   //karty
   public windows:[{name:string, keytype:string, purpose:string, keyalphabet:string,alphabet:string, Plaintext:string, output:string, event:string}]=[{ name:'None', keytype:'None', purpose:'None', keyalphabet:'None', alphabet:'None', Plaintext:'None', output:'None', event:'None'}];
   public chartData: [{ count: number, char: string }] = [{ count: 0, char: '0' }];
-  public primaryXAxis: Object;
-  public markerSettings: Object;
-  public marker: Object;
-  public tooltip: Object;
   public alphabet = [];
   public Keyalphabet = [];
   public CS: boolean;
   public disabled = [false, false, false, false, false, false, false, false];
   public analysis = [];
   public volno: boolean = true;
-  columnMarker: Object;
   public type = '';
   //PLAYFAIR
   public Replace: [{ name: string, name2: string }] = [{ name: 'X', name2: '' }];
   counter=0;
+  counterAn=0
+  toosmall=false;
 
 
 
@@ -99,6 +96,9 @@ export class AppComponent {
 
 
   async Loading() {
+    if (window.screen.width < 700) { 
+      this.toosmall=true
+    }
     /*this.Replace.splice(this.Replace.indexOf({name:'X',name2:''}));
     function delay(ms: number) {
       return new Promise( resolve => setTimeout(resolve, ms) );
@@ -355,7 +355,8 @@ export class AppComponent {
           await delay(300);
           this.windows.splice(this.windows.findIndex(x => x.event==='Analysis'),1);
           this.counter-=1;
-          this.chartData=[{count:0, char:'0'}]
+          this.chartData=[{count:0, char:'0'}];
+          this.counterAn=0;
           break;
         } else {
           TheMachineText = ['no', 'such', 'window', 'found'];
@@ -466,6 +467,8 @@ export class AppComponent {
         TheMachineText = ['all', 'sessions', 'have', 'been', 'terminated'];
         this.zasobnik(TheMachineText);
         this.chartData=[{count:0, char:'0'}]
+        this.counterAn=0
+        break;
       }
       default:{
         TheMachineText = ['Invalid','command'];
@@ -575,7 +578,8 @@ export class AppComponent {
         break;
       }
       case 'Analysis': {
-
+      
+       
         this.chartData = [{ count: 0, char: '0' }];
         this.analysis = [];
         var chars = []
@@ -590,14 +594,7 @@ export class AppComponent {
           }
 
         }
-        this.marker = {
-          dataLabel: {
-            visible: true
-          }
-        }
-        this.tooltip = {
-          enable: true, format: '${point.tooltip}'
-        };
+       
 
 
 
@@ -607,19 +604,60 @@ export class AppComponent {
           }
           this.chartData[i].char = chars[i];
           this.chartData[i].count = this.analysis[i];
-
+          
 
         }
         this.chartData.sort(function (a, b) {
           return a.count - b.count
         })
         this.chartData.reverse();
-        this.primaryXAxis = {
-          valueType: 'Category'
-        };
-        this.columnMarker = { dataLabel: { visible: true, position: 'Middle', template: '<div>${point.char}</div><div>${point.count}</div>' } };
+        var Chars=[];
+        var counts=[];
+        for(i=0;i<this.chartData.length;i++){
+          Chars.push(this.chartData[i].char)
+          counts.push(this.chartData[i].count)
+        }
+     
+      if(this.counterAn==0) { this.chart = new Chart('canvas',{
+          type:'bar',
+          data:{
+            labels: Chars,
+            datasets:[
+              {data:counts,
+              fill:true
+            }]
+            },
+          options:{
+            animation: {
+              duration: 0 
+          },
+          legend:{
+            display: false
+          },
+          scales:{
+            xAxes:[{
+              display:true,
+           
+            }],
+            yAxes:[{
+              display:true,
+              ticks: {
+                beginAtZero: true
+            }
+            }]
+          }
+          }
 
+        })}else{
+     
 
+          this.chart.data.labels=Chars;
+    this.chart.data.datasets=[{data:counts}];
+    this.chart.update();
+            
+    
+        }
+        if(Plaintext.length>0){this.counterAn++}
         break;
       }
       case 'Playfair': {

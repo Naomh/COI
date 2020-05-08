@@ -36,7 +36,7 @@
 <div class="bg-blink" *ngIf="!loadingon"></div>
 <div class="console SFA" *ngIf="!ofibg" style="color: rgb(8, 218, 1);">{{SFA}}</div>
 -->
-<div class="bg-offi" [@loading]="loading">
+<div *ngIf="!toosmall" class="bg-offi" [@loading]="loading">
     <div class="opening_loading_window container" [@loadingLoadingWindow]="loading">
         <h2 class="headline_loading"><span class="prefix" style="margin-right: 0.5vw">[<span
                     class="prefixblink">!</span>]</span>loading</h2>
@@ -116,19 +116,10 @@
         <!--základ-->
         <div style="margin-top: 1vw; margin-bottom: 1vw; padding-left: 1vw" *ngIf="window.event!='help'">
             <span class="content">Encrypted message</span>
-            <ejs-chart *ngIf="window.event === 'Analysis'" style="margin-right: 1vw; height: 20vh;" id="chart-container"
-                [primaryXAxis]="primaryXAxis" [tooltip]="tooltip">
-                <e-series-collection>
-                    <e-series [dataSource]="chartData" type="Column" xName="char" yName="count" name="analysis"
-                        [marker]="columnMarker">
-                    </e-series>
-                </e-series-collection>
-            </ejs-chart>
-            <div class="row" *ngIf="window.event === 'Analysis'">
-            <div class="col-sm-3 content2" *ngFor="let Dato of chartData" style="margin: 0vw; margin-top: 1vw;">
-                <div [@loading]="start" style="margin:0;font-size: 0.8vw">|<span style="color: rgba(240, 255, 255, 0.719);">{{Dato.char}} : {{Dato.count}}</span>|</div>
-            </div>
-        </div>
+           <div *ngIf="window.event==='Analysis'" style=" margin-right: 1vw;">
+            <canvas id='canvas'>{{chart}}</canvas>
+           </div>
+            
             <span class="content2" id="{{window.output}}"></span>
         
         </div>
@@ -167,3 +158,9 @@
 
     </div>
 </div>
+<div *ngIf="toosmall" ><div class="opening_loading_window container" >
+    <h2 class="headline_loading"><span class="prefix" style="margin-right: 0.5vw">[<span
+                class="prefixblink">!</span>]</span>Sorry, your device is too small for displaying this application. This problem will be fixed soon (hopefully)</h2>
+    <div class="subline_loading" style="font-size: 1vw; color:rgb(182, 184, 185);" >This problem will be fixed soon (hopefully)</div>
+
+</div></div>
