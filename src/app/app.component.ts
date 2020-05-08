@@ -76,7 +76,7 @@ export class AppComponent {
   //routing
   //karty
   public windows:[{name:string, keytype:string, purpose:string, keyalphabet:string,alphabet:string, Plaintext:string, output:string, event:string}]=[{ name:'None', keytype:'None', purpose:'None', keyalphabet:'None', alphabet:'None', Plaintext:'None', output:'None', event:'None'}];
-  public chartData: [{ count: number, char: string }] = [{ count: 0, char: '' }];
+  public chartData: [{ count: number, char: string }] = [{ count: 0, char: '0' }];
   public primaryXAxis: Object;
   public markerSettings: Object;
   public marker: Object;
@@ -154,7 +154,7 @@ export class AppComponent {
     this.disabled[0] = true;
     this.windows[this.counter]={ name:'Command list', keytype:'None', purpose:'Command line manual', keyalphabet:'None', alphabet:'None', Plaintext:'None', output:'None', event:'help' };
     this.counter+=1;
-    console.log('dostal jsem se až sem jeeej')
+    //console.log('dostal jsem se až sem jeeej')
     /*  for (var i = 0; i < TheMachineText.length; i++) {
   
         this.writing(TheMachineText[i])
@@ -195,7 +195,7 @@ export class AppComponent {
    }*/
   }
   async consoleinput(event) {
-    console.log(this.windows);
+    //console.log(this.windows);
     var TheMachineText: string[];
     function delay(ms: number) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -218,14 +218,14 @@ export class AppComponent {
         }
       }
       case "kill help": {
-        console.log('snažím se zabít help')
+        //console.log('snažím se zabít help')
         if (this.disabled[0] == true) {
           this.disabled[0] = false;
           TheMachineText = ['Target', 'Eliminated'];
           this.zasobnik(TheMachineText);
           this.windows.splice(this.windows.findIndex(x => x.event==='help'),1);
           this.counter-=1
-          console.log(this.counter)
+          //console.log(this.counter)
           break;
         } else {
           TheMachineText = ['no', 'such', 'window', 'found'];
@@ -242,7 +242,7 @@ export class AppComponent {
           this.zasobnik(TheMachineText);
           await delay(300);
           this.windows[this.counter]=({ name: 'caesar cipher', keytype: 'Alphabet', purpose: 'Cipher settings',keyalphabet:'None', alphabet: 'CaesarAlphabet', Plaintext: 'CaesarPlaintext', output: 'OutputCaesar', event: 'Caesar'});
-          console.log(this.windows);
+          //console.log(this.windows);
           this.counter+=1;
           break;
         } else {
@@ -355,6 +355,7 @@ export class AppComponent {
           await delay(300);
           this.windows.splice(this.windows.findIndex(x => x.event==='Analysis'),1);
           this.counter-=1;
+          this.chartData=[{count:0, char:'0'}]
           break;
         } else {
           TheMachineText = ['no', 'such', 'window', 'found'];
@@ -463,7 +464,8 @@ export class AppComponent {
         }
         this.counter=0;
         TheMachineText = ['all', 'sessions', 'have', 'been', 'terminated'];
-        this.zasobnik(TheMachineText)
+        this.zasobnik(TheMachineText);
+        this.chartData=[{count:0, char:'0'}]
       }
       default:{
         TheMachineText = ['Invalid','command'];
@@ -484,7 +486,7 @@ export class AppComponent {
     }
 
     var Plaintext = (<HTMLInputElement>document.getElementById(typ + 'Plaintext')).value;
-    console.log(typ)
+    //console.log(typ)
     if (typ != 'aes' && typ != 'sha') {
       Plaintext = Plaintext.toUpperCase();
     }
@@ -499,7 +501,7 @@ export class AppComponent {
           for (var i = 0; i < Plaintext.length; i++) {
 
             if (this.alphabet.indexOf(Plaintext.charAt(i)) == -1) {
-              console.log(this.alphabet);
+              //console.log(this.alphabet);
               kryptogram += Plaintext.charAt(i);
 
             } else {
@@ -520,7 +522,7 @@ export class AppComponent {
 
                 }
                 kryptogram += this.alphabet[this.alphabet.indexOf(Plaintext.charAt(i)) + posun]
-                console.log('Kryptogram', kryptogram);
+                //console.log('Kryptogram', kryptogram);
               }
 
             }
@@ -574,12 +576,12 @@ export class AppComponent {
       }
       case 'Analysis': {
 
-        this.chartData = [{ count: 0, char: '' }];
+        this.chartData = [{ count: 0, char: '0' }];
         this.analysis = [];
         var chars = []
 
         for (i = 0; i < Plaintext.length; i++) {
-          if (chars.indexOf(Plaintext.charAt(i)) == -1) {
+          if (chars.indexOf(Plaintext.charAt(i)) == -1 && Plaintext.charAt(i)!=' ') {
             this.analysis.push(1);
             chars.push(Plaintext.charAt(i))
           }
@@ -686,7 +688,7 @@ export class AppComponent {
           } else if (~~(this.Keyalphabet.indexOf(Bigram[0]) / radky) == ~~(this.Keyalphabet.indexOf(Bigram[1]) / radky)) {
 
             for (y = 0; y < Bigram.length; y++) {
-              console.log(this.Keyalphabet.indexOf(Bigram[y]) % radky);
+              //console.log(this.Keyalphabet.indexOf(Bigram[y]) % radky);
               if (~~((this.Keyalphabet.indexOf(Bigram[y]) + 1) / radky) != ~~(this.Keyalphabet.indexOf(Bigram[y]) / radky) && Decode != true) {
                 kryptogram += this.Keyalphabet[this.Keyalphabet.indexOf(Bigram[y]) - (radky - 1)];
               } else if (Decode != true) {
@@ -707,13 +709,14 @@ export class AppComponent {
         break;
       }
       case 'aes': {
-        if (Plaintext == '') { console.log(); break };
+        if (Plaintext == '') { //console.log(); 
+          break };
         var key = ((<HTMLInputElement>document.getElementById('AESKey')).value);
         if (Decode != true) {
           kryptogram = CryptoJS.AES.encrypt(Plaintext.toString(), key.toString()).toString();
         }
         else {
-          console.log(Plaintext)
+          //console.log(Plaintext)
           var bytes = CryptoJS.AES.decrypt(Plaintext, key);
           var kryptogram = bytes.toString(CryptoJS.enc.Utf8);
 
@@ -743,7 +746,7 @@ export class AppComponent {
     if (typ != 'Analysis') { (<HTMLInputElement>document.getElementById('Output' + typ)).textContent = kryptogram; }
   }
   CKey(znamenko) {
-    console.log(znamenko);
+    //console.log(znamenko);
     if (znamenko == 'CaesarP' || znamenko == 'CaesarN') {
       var klic = parseInt((<HTMLInputElement>document.getElementById('Caesar')).value);
       this.getalphabet('Caesar');
@@ -785,7 +788,7 @@ export class AppComponent {
 
   }
   getalphabet(sifra) {
-    console.log('abeceda zatím v pohodě')
+    //console.log('abeceda zatím v pohodě')
     this.Keyalphabet = []
     this.alphabet = []
     switch ((<HTMLInputElement>document.getElementById(sifra + 'Alphabet')).value.toUpperCase()) {
@@ -850,9 +853,9 @@ export class AppComponent {
     }
   }
   public zasobnik(predat) {
-    console.log('chystam se predavam', predat);
+    //console.log('chystam se predavam', predat);
     if (this.volno == true) {
-      console.log('predavam', predat);
+      //console.log('predavam', predat);
       this.writing(predat);
     }
   }

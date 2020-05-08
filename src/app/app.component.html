@@ -74,7 +74,7 @@
             type="text" id="{{window.alphabet}}" (keyup)="Sifrovat(window.event)"></textarea>
 
         <!--substituční-->
-        <textarea *ngIf="window.event === 'Substitution' || window.event === 'vigenere' || window.event === 'Playfair'" class="CTA" wrap="off"
+        <textarea *ngIf="window.event === 'Substitution' || window.event === 'Vigenere' || window.event === 'Playfair'" class="CTA" wrap="off"
             Placeholder="Key Alphabet" type="text" id="{{window.keyalphabet}}"
             (keyup)="Sifrovat(window.event)"></textarea>
         <!--základ-->
@@ -116,14 +116,21 @@
         <!--základ-->
         <div style="margin-top: 1vw; margin-bottom: 1vw; padding-left: 1vw" *ngIf="window.event!='help'">
             <span class="content">Encrypted message</span>
-            <ejs-chart *ngIf="window.name === 'Analysis'" style="margin-right: 1vw; height: 20vh;" id="chart-container"
+            <ejs-chart *ngIf="window.event === 'Analysis'" style="margin-right: 1vw; height: 20vh;" id="chart-container"
                 [primaryXAxis]="primaryXAxis" [tooltip]="tooltip">
                 <e-series-collection>
                     <e-series [dataSource]="chartData" type="Column" xName="char" yName="count" name="analysis"
                         [marker]="columnMarker">
                     </e-series>
                 </e-series-collection>
-            </ejs-chart><span class="content2" id="{{window.output}}"></span>
+            </ejs-chart>
+            <div class="row" *ngIf="window.event === 'Analysis'">
+            <div class="col-sm-3 content2" *ngFor="let Dato of chartData" style="margin: 0vw; margin-top: 1vw;">
+                <div [@loading]="start" style="margin:0;font-size: 0.8vw">|<span style="color: rgba(240, 255, 255, 0.719);">{{Dato.char}} : {{Dato.count}}</span>|</div>
+            </div>
+        </div>
+            <span class="content2" id="{{window.output}}"></span>
+        
         </div>
         <div style="margin-top: 1vw; margin-bottom: 1vw; padding-left: 0.5vw;" *ngIf="window.event === 'help'">
             <span class="content">Available commands:</span>
